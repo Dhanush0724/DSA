@@ -1,0 +1,63 @@
+# Adjancy List in Graph
+
+def adjancy_list(edges,num_vertices):
+    adj_list = [[] for _ in range(num_vertices)]
+
+    for u,v in edges:
+        adj_list[u].append(v)
+        adj_list[v].append(u)
+    #print(adj_list)
+    return adj_list
+
+def add_vertex(adj_list):
+    adj_list.append([])
+    
+def add_edge(adj_list,u,v):
+    adj_list[u].append(v)
+    adj_list[v].append(u)
+
+    
+def remove_edge(adj_list,u,v):
+    adj_list[u].remove(v)
+    adj_list[v].remove(u)
+
+def remove_vertex(adj_list, vertex):
+    for neighbour in adj_list[vertex]:
+        adj_list[neighbour].remove(vertex)
+    
+    adj_list.pop(vertex)
+
+    #update remaining lists
+    for i in range(len(adj_list)):
+        adj_list[i] = [x-1 if x>vertex else x for x in adj_list[i]]
+
+if __name__ == "__main__":
+    num_vertices = 4
+    edges = [(0,1),(0,2),(1,2),(2,3),(3,1)]
+
+    adj_list = adjancy_list(edges,num_vertices)
+    print("Initial adjaceny list ")
+    for i in range(num_vertices):
+        print(f"{i}->{' '.join(map(str,adj_list[i]))}")
+    
+    add_edge(adj_list,0,3)
+    print("adding and edge 0,3 to adjaceny list ")
+    for i in range(num_vertices):
+        print(f"{i}->{' '.join(map(str,adj_list[i]))}")
+    
+    remove_edge(adj_list,0,3)
+    print("removing edge 0,3 in adjaceny list ")
+    for i in range(num_vertices):
+        print(f"{i}->{' '.join(map(str,adj_list[i]))}")
+    
+    add_vertex(adj_list)
+    print("adding vertex  in adjaceny list ")
+    for i in range(num_vertices):
+        print(f"{i}->{' '.join(map(str,adj_list[i]))}")
+    
+
+    
+    remove_vertex(adj_list , 4)
+    print("Iremoving vertex 4 in adjaceny list ")
+    for i in range(num_vertices):
+        print(f"{i}->{' '.join(map(str,adj_list[i]))}")
