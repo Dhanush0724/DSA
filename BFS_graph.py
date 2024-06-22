@@ -14,8 +14,10 @@ def bfs(adjlist,startnode,visited):
                 visited[neighbour] = True
                 q.append(neighbour)
 
+
 def addEdge(adjlist,u,v):
     adjlist[u].append(v)
+
 
 def main():
     vertices = 5
