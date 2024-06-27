@@ -152,19 +152,94 @@
 
 # missing number in arraY
 
-def missing(arr,n):
+# def missing(arr,n):
 
-    summation = (n*(n+1)) // 2
-    print(summation)
+#     summation = (n*(n+1)) // 2
+   
     
-    s2 = sum(arr)
-    print(s2)
-    missingnum = summation - s2
-    return missingnum
-arr = [1,2,4,5]
-n = 5
+#     s2 = sum(arr)
+    
+#     missingnum = summation - s2
+#     return missingnum
+# arr = [1,2,4,5]
+# n = 5
 
-print(missing(arr,n))
+# print(missing(arr,n))
+
+###consective one's in the array
+
+# def ones(arr):
+#     count = 0
+#     maxi = 0
+#     for i in range(len(arr)):
+#         if arr[i] == 1:
+#             count+=1
+#         else : 
+#             count = 0
+#         maxi = max(maxi,count)
+#     return maxi
+
+# arr = [1,1,0,1,1,1]
+# print(ones(arr))
+
+# find numbers which appers onces
+ 
+# def apperones(arr):
+#     n = len(arr)
+#     count = 0
+#     for i in range(n):
+#         num = arr[i]
+#         for j in range(n):
+#             if arr[j] == num:
+#                 count+=1
+#         if count == 1:
+#             return num
+#     return -1
+
+# def apperoptimal(arr):
+#     xorr  =0
+#     for num in arr:
+#         xorr ^= num
+#     return xorr
+
+# arr = [4,1,2,1,2]
+# print(apperones(arr))
+# print(apperoptimal(arr))
+
+### longest subarrray with givenm sum k
+
+def longestsubarray(arr,n,k):
+    
+    left,right = 0,0
+    sum = 0
+    maxlen = 0
+
+    while right<n:
+
+        sum += arr[right]
+
+        while sum > k and left<=right:
+            sum -=arr[left]
+            left += 1
+
+        if sum == k:
+            maxlen = max(maxlen,right-left+1) 
+
+        right += 1
+        
+    return maxlen
+
+    
+
+arr = [2, 3, 5, 1, 9]
+n = 3
+k =5
+print(longestsubarray(arr,n,k))
+
+
+
+
+
 
 
 
