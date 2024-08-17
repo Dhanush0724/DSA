@@ -1,0 +1,52 @@
+def replace_surrounded_O(mat):
+    if not mat or not mat[0]:
+        return
+
+    n = len(mat)
+    m = len(mat[0])
+
+    # A utility function to mark all 'O's connected to the boundary 'O's
+    def dfs(i, j):
+        if i < 0 or i >= n or j < 0 or j >= m or mat[i][j] != 'O':
+            return
+        mat[i][j] = 'B'  # Mark 'O' as 'B' to indicate it is connected to the boundary
+        # Recur for all connected 'O's
+        dfs(i+1, j)
+        dfs(i-1, j)
+        dfs(i, j+1)
+        dfs(i, j-1)
+
+    # Traverse the boundary of the matrix
+    for i in range(n):
+        for j in range(m):
+            if (i == 0 or i == n-1 or j == 0 or j == m-1) and mat[i][j] == 'O':
+                dfs(i, j)
+
+    # Replace all 'O' with 'X' (those that are not connected to boundary 'O's)
+    for i in range(n):
+        for j in range(m):
+            if mat[i][j] == 'O':
+                mat[i][j] = 'X'
+
+    # Convert all 'B' back to 'O'
+    for i in range(n):
+        for j in range(m):
+            if mat[i][j] == 'B':
+                mat[i][j] = 'O'
+
+    return mat
+
+# Example usage
+n = 5
+m = 4
+mat = [
+    ['X', 'O', 'X', 'X'],
+    ['X', 'O', 'O', 'X'],
+    ['X', 'X', 'O', 'X'],
+    ['O', 'X', 'X', 'X'],
+    ['X', 'X', 'X', 'X']
+]
+
+result = replace_surrounded_O(mat)
+for row in result:
+    print(' '.join(row))
